@@ -1,6 +1,6 @@
 let pontuacao = 0
 let tentativas = 0
-let qtdCards = 14
+let qtdCards = 1
 const figuras = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot']
 let figurasDuplicadas = []
 
