@@ -2,14 +2,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+    scrollbar-width: none;
 }
 
 body {
     background-color: #eef9bf;
 
     margin-top: 40px;
-    margin-left: 122px;
-    margin-right: 122px;
+    margin-left: 116px;
+    margin-right: 116px;
 }
 
 h1 {
@@ -22,6 +24,14 @@ h1 {
 
     display: flex;
     justify-content: center;
+
+    text-align: center;
+}
+
+@media (max-width: 499px) {
+    h1 {
+        font-size: 36px;
+    }
 }
 
 .cards-container {
@@ -29,6 +39,8 @@ h1 {
     gap: 34px;
     justify-content: center;
     flex-wrap: wrap;
+
+    padding-bottom: 34px;
 }
 
 .card {
@@ -74,4 +86,16 @@ h1 {
 
 .front-face.viradinha {
     transform: rotateY(-180deg);
+}
+
+.back-face.desviradinha {
+    transform: rotateY(180deg);
+}
+
+.front-face.desviradinha {
+    transform: rotateY(0deg);
+}
+
+.disable-click {
+    pointer-events: none;
 }

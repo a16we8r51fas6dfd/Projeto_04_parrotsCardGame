@@ -1,4 +1,6 @@
-let qtdCards = 0
+let pontuacao = 0
+let tentativas = 0
+let qtdCards = 14
 const figuras = ['bobrossparrot', 'explodyparrot', 'fiestaparrot', 'metalparrot', 'revertitparrot', 'tripletsparrot', 'unicornparrot']
 let figurasDuplicadas = []
 
@@ -48,15 +50,94 @@ function darCartas() {
     
 }
 
-function clickCard(card) {
-    console.log('help')
+let primeiraCarta = null
+let segundaCarta = null
 
+let arrayComparacao = []
+
+const todasAsCartas = document.querySelector(".cards-container")
+
+function clickCard(card) {
+
+    
     const front = card.querySelector(".card .front-face")
     const back = card.querySelector(".card .back-face")
 
-    front.classList.add("viradinha")
-    back.classList.add("viradinha")
+
+    if (primeiraCarta === null ) {
+        primeiraCarta = back.innerHTML
+
+        arrayComparacao.push(back.parentNode)
+
+        back.classList.add("viradinha")
+        front.classList.add("viradinha")
+
+        arrayComparacao[0].classList.add("disable-click")
+
+    } else if (segundaCarta === null) {
+        segundaCarta = back.innerHTML 
+
+        arrayComparacao.push(back.parentNode)
+        
+        back.classList.add("viradinha")
+        front.classList.add("viradinha")
+        
+        arrayComparacao[1].classList.add("disable-click")
+
+    }
+
+    if (primeiraCarta !== null && segundaCarta!== null && arrayComparacao[0] !== arrayComparacao[1]) {
+
+        if (primeiraCarta == segundaCarta) {
+            
+            arrayComparacao = []
+            pontuacao ++
+            tentativas ++
+
+        } else {
+            todasAsCartas.classList.add("disable-click")
+            setTimeout(desviradinha, 1000)
+            tentativas ++
+
+        }
+
+        primeiraCarta = null
+        segundaCarta = null
+    }
+
+    if (pontuacao === qtdCards/2) {
+        alert(`Você ganhou em ${tentativas} jogadas`)
+    }
 
 }
+
+function desviradinha() {
+
+    let cardBack1 = arrayComparacao[0].querySelector(".back-face")
+    let cardFront1 = arrayComparacao[0].querySelector(".front-face")
+    let cardBack2 = arrayComparacao[1].querySelector(".back-face")
+    let cardFront2 = arrayComparacao[1].querySelector(".front-face")
+
+    cardBack1.classList.remove("viradinha")
+    cardFront1.classList.remove("viradinha")
+    cardBack2.classList.remove("viradinha")
+    cardFront2.classList.remove("viradinha")
+
+    cardBack1.parentNode.classList.remove("disable-click")
+    cardFront1.parentNode.classList.remove("disable-click")
+    cardBack2.parentNode.classList.remove("disable-click")
+    cardFront2.parentNode.classList.remove("disable-click")
+
+
+    primeiraCarta = null
+    segundaCarta = null
+
+    todasAsCartas.classList.remove("disable-click")
+
+    arrayComparacao = []
+}
+
+
+
 
 quantidadeDeCartas()
